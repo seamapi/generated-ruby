@@ -12,12 +12,12 @@ RSpec.describe Seam::Clients::AccessCodes do
 
       before do
         stub_seam_request(:post, "/access_codes/list",
-          {access_codes: [access_code_hash]}).with do |req|
+                          {access_codes: [access_code_hash]}).with do |req|
           req.body.source == {device_id: device_id}.to_json
         end
       end
 
-      let(:access_codes) { client.access_codes.list(device_id) }
+      let(:access_codes) { client.access_codes.list(device_id: device_id) }
 
       it "returns a list of Access codes" do
         expect(access_codes).to be_a(Array)
@@ -29,9 +29,9 @@ RSpec.describe Seam::Clients::AccessCodes do
     context "'access_code_ids' param" do
       before do
         stub_seam_request(:post, "/access_codes/list",
-          {access_codes: [access_code_hash]}).with do |req|
-            req.body.source == {access_code_ids: [access_code_id]}.to_json
-          end
+                          {access_codes: [access_code_hash]}).with do |req|
+          req.body.source == {access_code_ids: [access_code_id]}.to_json
+        end
       end
 
       let(:access_codes) { client.access_codes.list(access_code_ids: [access_code_id]) }
@@ -47,7 +47,9 @@ RSpec.describe Seam::Clients::AccessCodes do
   describe "#get" do
     let(:access_code_id) { "access_code_id_1234" }
     let(:access_code_hash) { {access_code_id: access_code_id} }
-    let(:delay_in_setting_warning) { {warning_code: "delay_in_setting_on_device", message: "Delay in setting access code"} }
+    let(:delay_in_setting_warning) do
+      {warning_code: "delay_in_setting_on_device", message: "Delay in setting access code"}
+    end
     let(:failed_to_set_error) { {error_code: "failed_to_set_on_device", message: "Failed to set access code"} }
 
     before do
@@ -59,7 +61,7 @@ RSpec.describe Seam::Clients::AccessCodes do
       ).with { |req| req.body.source == {access_code_id: access_code_id}.to_json }
     end
 
-    let(:result) { client.access_codes.get(access_code_id) }
+    let(:result) { client.access_codes.get(access_code_id: access_code_id) }
 
     it "returns an Access Code" do
       expect(result).to be_a(Seam::AccessCode)
@@ -76,17 +78,11 @@ RSpec.describe Seam::Clients::AccessCodes do
 
   describe "#create" do
     let(:access_code_hash) { {device_id: "1234", name: "A C", code: 1234} }
-    let(:action_attempt_hash) { {action_attempt_id: "1234", status: "pending"} }
 
     before do
       stub_seam_request(
-        :post, "/access_codes/create", {action_attempt: action_attempt_hash}
+        :post, "/access_codes/create", {access_code: access_code_hash}
       )
-
-      stub_seam_request(
-        :post, "/action_attempts/get", {action_attempt: {result: {access_code: access_code_hash},
-                                                         status: "success"}}
-      ).with { |req| req.body.source == {action_attempt_id: action_attempt_hash[:action_attempt_id]}.to_json }
     end
 
     let(:result) { client.access_codes.create(**access_code_hash) }
@@ -118,10 +114,10 @@ RSpec.describe Seam::Clients::AccessCodes do
       ).with { |req| req.body.source == {action_attempt_id: action_attempt_hash[:action_attempt_id]}.to_json }
     end
 
-    let(:result) { client.access_codes.delete(access_code_id) }
+    let(:result) { client.access_codes.delete(access_code_id: access_code_id) }
 
     it "returns an Access Code" do
-      expect(result).to be_a(Seam::ActionAttempt)
+      expect(result).to be_a(NilClass)
     end
   end
 
@@ -150,7 +146,7 @@ RSpec.describe Seam::Clients::AccessCodes do
     let(:result) { client.access_codes.update(access_code_id: access_code_id, type: "ongoing") }
 
     it "returns an Access Code" do
-      expect(result).to be_a(Seam::ActionAttempt)
+      expect(result).to be_a(NilClass)
     end
   end
 
@@ -166,7 +162,7 @@ RSpec.describe Seam::Clients::AccessCodes do
       end
     end
 
-    let(:result) { client.access_codes.pull_backup_access_code(access_code_id) }
+    let(:result) { client.access_codes.pull_backup_access_code(access_code_id: access_code_id) }
 
     it "returns an backup Access Code" do
       expect(result).to be_a(Seam::AccessCode)
