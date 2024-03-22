@@ -12,7 +12,7 @@ RSpec.describe Seam::Clients::AccessCodes do
 
       before do
         stub_seam_request(:post, "/access_codes/list",
-                          {access_codes: [access_code_hash]}).with do |req|
+          {access_codes: [access_code_hash]}).with do |req|
           req.body.source == {device_id: device_id}.to_json
         end
       end
@@ -29,7 +29,7 @@ RSpec.describe Seam::Clients::AccessCodes do
     context "'access_code_ids' param" do
       before do
         stub_seam_request(:post, "/access_codes/list",
-                          {access_codes: [access_code_hash]}).with do |req|
+          {access_codes: [access_code_hash]}).with do |req|
           req.body.source == {access_code_ids: [access_code_id]}.to_json
         end
       end

@@ -12,7 +12,7 @@ module Seam
           body: {action_attempt_id: action_attempt_id}.compact
         )
 
-        action_attempt.decide_and_wait(wait_for_action_attempt: wait_for_action_attempt)
+        action_attempt.decide_and_wait(wait_for_action_attempt)
         action_attempt
       end
 
