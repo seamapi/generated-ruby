@@ -2,8 +2,8 @@
 
 module Seam
   class Event < BaseResource
-    attr_accessor :event_id, :event_type, :payload, :workspace_id, :device_id
+    attr_accessor :event_id, :device_id, :event_type, :workspace_id
 
-    date_accessor :created_at
+    date_accessor :created_at, :occurred_at
   end
 end

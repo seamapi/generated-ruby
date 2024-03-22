@@ -3,29 +3,43 @@
 module Seam
   module Clients
     class ConnectedAccounts < BaseClient
-      def get(connected_account_id_or_body)
-        body = if connected_account_id_or_body.is_a?(String)
-          {connected_account_id: connected_account_id_or_body}
-        else
-          connected_account_id_or_body
-        end
+      def delete(connected_account_id:, sync: nil)
+        request_seam(
+          :post,
+          "/connected_accounts/delete",
+          body: {connected_account_id: connected_account_id, sync: sync}.compact
+        )
 
+        nil
+      end
+
+      def get(connected_account_id: nil, email: nil)
         request_seam_object(
           :post,
           "/connected_accounts/get",
           Seam::ConnectedAccount,
           "connected_account",
-          body: body
+          body: {connected_account_id: connected_account_id, email: email}.compact
         )
       end
 
-      def list(body = {})
+      def list(custom_metadata_has: nil)
         request_seam_object(
           :post,
           "/connected_accounts/list",
           Seam::ConnectedAccount,
           "connected_accounts",
-          body: body
+          body: {custom_metadata_has: custom_metadata_has}.compact
+        )
+      end
+
+      def update(connected_account_id:, automatically_manage_new_devices: nil, custom_metadata: nil)
+        request_seam_object(
+          :post,
+          "/connected_accounts/update",
+          Seam::ConnectedAccount,
+          "connected_account",
+          body: {connected_account_id: connected_account_id, automatically_manage_new_devices: automatically_manage_new_devices, custom_metadata: custom_metadata}.compact
         )
       end
     end

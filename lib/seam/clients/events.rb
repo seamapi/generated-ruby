@@ -13,14 +13,13 @@ module Seam
         )
       end
 
-      def list(since: str, event_type: nil, event_types: nil, device_id: nil, device_ids: nil)
+      def list(since: nil, between: nil, device_id: nil, device_ids: nil, access_code_id: nil, access_code_ids: nil, event_type: nil, event_types: nil, connected_account_id: nil, limit: nil)
         request_seam_object(
           :post,
           "/events/list",
           Seam::Event,
           "events",
-          body: {event_type: event_type, event_types: event_types, device_id: device_id,
-                 device_ids: device_ids, since: since}.compact
+          body: {since: since, between: between, device_id: device_id, device_ids: device_ids, access_code_id: access_code_id, access_code_ids: access_code_ids, event_type: event_type, event_types: event_types, connected_account_id: connected_account_id, limit: limit}.compact
         )
       end
     end

@@ -2,6 +2,6 @@
 
 module Seam
   class Workspace < BaseResource
-    attr_accessor :workspace_id, :name, :connect_partner_name, :is_sandbox
+    attr_accessor :workspace_id, :name, :is_sandbox, :connect_partner_name
   end
 end

@@ -59,7 +59,10 @@ module Seam
       {
         "User-Agent" => user_agent,
         "Content-Type" => "application/json",
-        "Authorization" => "Bearer #{api_key}"
+        "Authorization" => "Bearer #{api_key}",
+        :"seam-sdk-name" => "seamapi/ruby",
+        :"seam-sdk-version" => Seam::VERSION,
+        :"seam-lts-version" => Seam::LTS_VERSION
       }
     end
 
