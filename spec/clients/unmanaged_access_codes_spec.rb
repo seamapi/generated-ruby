@@ -13,7 +13,7 @@ RSpec.describe Seam::Clients::AccessCodesUnmanaged do
       ).with { |req| req.body.source == {access_code_id: access_code_id}.to_json }
     end
 
-    let(:result) { client.unmanaged_access_codes.get(access_code_id) }
+    let(:result) { client.unmanaged_access_codes.get(access_code_id: access_code_id) }
 
     it "returns an unmanaged Access Code" do
       expect(result).to be_a(Seam::UnmanagedAccessCode)
@@ -26,12 +26,12 @@ RSpec.describe Seam::Clients::AccessCodesUnmanaged do
 
     before do
       stub_seam_request(:post, "/access_codes/unmanaged/list",
-        {access_codes: [unmanaged_access_code_hash]}).with do |req|
+                        {access_codes: [unmanaged_access_code_hash]}).with do |req|
         req.body.source == {device_id: device_id}.to_json
       end
     end
 
-    let(:unmanaged_access_codes) { client.unmanaged_access_codes.list(device_id) }
+    let(:unmanaged_access_codes) { client.unmanaged_access_codes.list(device_id: device_id) }
 
     it "returns a list of unmanaged Access Codes" do
       expect(unmanaged_access_codes).to be_a(Array)
@@ -54,18 +54,14 @@ RSpec.describe Seam::Clients::AccessCodesUnmanaged do
       stub_seam_request(
         :post,
         "/action_attempts/get",
-        {
-          action_attempt: {
-            status: "success"
-          }
-        }
+        nil
       ).with { |req| req.body.source == {action_attempt_id: action_attempt_hash[:action_attempt_id]}.to_json }
     end
 
-    let(:result) { client.unmanaged_access_codes.convert_to_managed(access_code_id) }
+    let(:result) { client.unmanaged_access_codes.convert_to_managed(access_code_id: access_code_id) }
 
     it "returns an Action Attempt" do
-      expect(result).to be_a(Seam::ActionAttempt)
+      expect(result).to be_a(NilClass)
     end
   end
 
@@ -83,18 +79,14 @@ RSpec.describe Seam::Clients::AccessCodesUnmanaged do
       stub_seam_request(
         :post,
         "/action_attempts/get",
-        {
-          action_attempt: {
-            status: "success"
-          }
-        }
+        nil
       ).with { |req| req.body.source == {action_attempt_id: action_attempt_hash[:action_attempt_id]}.to_json }
     end
 
-    let(:result) { client.unmanaged_access_codes.delete(access_code_id) }
+    let(:result) { client.unmanaged_access_codes.delete(access_code_id: access_code_id) }
 
     it "returns an Action Attempt" do
-      expect(result).to be_a(Seam::ActionAttempt)
+      expect(result).to be_a(NilClass)
     end
   end
 end
