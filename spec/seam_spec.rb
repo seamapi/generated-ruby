@@ -7,13 +7,13 @@ RSpec.describe Seam do
 
   describe "#health" do
     before do
-      stub_seam_request(:get, "/health", {ok: true})
+      stub_seam_request(:post, "/health/get_health", {ok: true})
     end
 
     let(:client) { Seam::Client.new(api_key: "some_api_key") }
 
     it "returns a hash" do
-      expect(client.health).to be_a(Hash)
+      expect(client.health.get_health).to be_a(NilClass)
     end
   end
 end
