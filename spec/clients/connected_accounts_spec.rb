@@ -14,7 +14,7 @@ RSpec.describe Seam::Clients::ConnectedAccounts do
         ).with { |req| req.body.source == {connected_account_id: connected_account_id}.to_json }
       end
 
-      let(:result) { client.connected_accounts.get(connected_account_id) }
+      let(:result) { client.connected_accounts.get(connected_account_id: connected_account_id) }
 
       it "returns a ConnectedAccount" do
         expect(result).to be_a(Seam::ConnectedAccount)
@@ -50,7 +50,7 @@ RSpec.describe Seam::Clients::ConnectedAccounts do
         ).with { |req| req.body.source == {connected_account_id: connected_account_id}.to_json }
       end
 
-      let(:result) { client.connected_accounts.get(connected_account_id) }
+      let(:result) { client.connected_accounts.get(connected_account_id: connected_account_id) }
 
       it "returns errors on connected account" do
         expect(result.errors.first.error_code).to eq("account_disconnected")
