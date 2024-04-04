@@ -28,7 +28,7 @@ RSpec.describe Seam::Clients::Devices do
         stub_seam_request(:post, "/devices/get", {device: device_hash}).with { |req| req.body.source == {device_id: device_id}.to_json }
       end
 
-      let(:result) { client.devices.get(device_id) }
+      let(:result) { client.devices.get(device_id: device_id) }
 
       it "returns a Device" do
         expect(result).to be_a(Seam::Device)
@@ -66,7 +66,7 @@ RSpec.describe Seam::Clients::Devices do
       }).with { |req| req.body.source == {device_id: device_id}.to_json }
     end
 
-    let(:result) { client.devices.get(device_id) }
+    let(:result) { client.devices.get(device_id: device_id) }
 
     it "returns a Device" do
       expect(result).to be_a(Seam::Device)
@@ -121,7 +121,7 @@ RSpec.describe Seam::Clients::Devices do
         .with { |req| req.body.source == {provider_category: "stable"}.to_json }
     end
 
-    let(:device_providers) { client.devices.list_device_providers({provider_category: "stable"}) }
+    let(:device_providers) { client.devices.list_device_providers(provider_category: "stable") }
 
     it "returns a list of stable Device Providers" do
       expect(device_providers).to be_a(Array)
@@ -139,7 +139,7 @@ RSpec.describe Seam::Clients::Devices do
     let(:name) { "New Device Name" }
 
     before do
-      stub_seam_request(:post, "/devices/update", {ok: true})
+      stub_seam_request(:post, "/devices/update", nil)
         .with do |req|
           req.body.source == {device_id: device_id, name: name}.to_json
         end
@@ -148,7 +148,7 @@ RSpec.describe Seam::Clients::Devices do
     let(:response) { client.devices.update(device_id: device_id, name: name) }
 
     it "returns success" do
-      expect(response).to eq({"ok" => true})
+      expect(response).to be_a(NilClass)
     end
   end
 end
