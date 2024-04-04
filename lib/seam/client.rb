@@ -2,7 +2,7 @@
 
 module Seam
   class Client
-    attr_accessor :api_key, :base_uri, :debug
+    attr_accessor :api_key, :base_uri, :debug, :wait_for_action_attempt
 
     def self.lts_version
       Seam::LTS_VERSION
