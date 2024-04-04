@@ -30,7 +30,7 @@ RSpec.describe Seam::Clients::ConnectWebviews do
       ).with { |req| req.body.source == {connect_webview_id: connect_webview_id}.to_json }
     end
 
-    let(:result) { client.connect_webviews.get(connect_webview_id) }
+    let(:result) { client.connect_webviews.get(connect_webview_id: connect_webview_id) }
 
     it "returns a Device" do
       expect(result).to be_a(Seam::ConnectWebview)
@@ -50,22 +50,22 @@ RSpec.describe Seam::Clients::ConnectWebviews do
         :post, "/connect_webviews/create", {connect_webview: connect_webview_hash}
       ).with do |req|
         req.body.source == {
-          accepted_providers: accepted_providers,
+          device_selection_mode: device_selection_mode,
           custom_redirect_url: custom_redirect_url,
           custom_redirect_failure_url: custom_redirect_failure_url,
-          automatically_manage_new_devices: automatically_manage_new_devices,
-          device_selection_mode: device_selection_mode
+          accepted_providers: accepted_providers,
+          automatically_manage_new_devices: automatically_manage_new_devices
         }.to_json
       end
     end
 
     let(:result) do
       client.connect_webviews.create(
-        accepted_providers: accepted_providers,
+        device_selection_mode: device_selection_mode,
         custom_redirect_url: custom_redirect_url,
         custom_redirect_failure_url: custom_redirect_failure_url,
-        automatically_manage_new_devices: automatically_manage_new_devices,
-        device_selection_mode: device_selection_mode
+        accepted_providers: accepted_providers,
+        automatically_manage_new_devices: automatically_manage_new_devices
       )
     end
 
