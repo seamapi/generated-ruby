@@ -7,7 +7,7 @@ RSpec.describe Seam::Clients::Locks do
     let(:locks_hash) { {device_id: "123"} }
 
     before do
-      stub_seam_request(:post, "/locks/list", {locks: [locks_hash]})
+      stub_seam_request(:post, "/locks/list", {devices: [locks_hash]})
     end
 
     let(:devices) { client.locks.list }
@@ -24,10 +24,10 @@ RSpec.describe Seam::Clients::Locks do
     let(:locks_hash) { {device_id: device_id} }
 
     before do
-      stub_seam_request(:post, "/locks/get", {lock: locks_hash}).with { |req| req.body.source == {device_id: device_id}.to_json }
+      stub_seam_request(:post, "/locks/get", {device: locks_hash}).with { |req| req.body.source == {device_id: device_id}.to_json }
     end
 
-    let(:lock) { client.locks.get(device_id) }
+    let(:lock) { client.locks.get(device_id: device_id) }
 
     it "returns a list of Devices" do
       expect(lock).to be_a(Seam::Device)
@@ -62,16 +62,7 @@ RSpec.describe Seam::Clients::Locks do
       let(:endpoint) { "unlock_door" }
 
       describe "with a device_id" do
-        let(:result) { client.locks.unlock_door(device_id) }
-
-        it "returns an action attempt" do
-          expect(result).to be_a(Seam::ActionAttempt)
-        end
-      end
-
-      describe "with a device object" do
-        let(:device) { Seam::Device.new({device_id: device_id}) }
-        let(:result) { client.locks.unlock_door(device) }
+        let(:result) { client.locks.unlock_door(device_id: device_id) }
 
         it "returns an action attempt" do
           expect(result).to be_a(Seam::ActionAttempt)
@@ -83,16 +74,7 @@ RSpec.describe Seam::Clients::Locks do
       let(:endpoint) { "lock_door" }
 
       describe "with a device_id" do
-        let(:result) { client.locks.lock_door(device_id) }
-
-        it "returns an action attempt" do
-          expect(result).to be_a(Seam::ActionAttempt)
-        end
-      end
-
-      describe "with a device object" do
-        let(:device) { Seam::Device.new({device_id: device_id}) }
-        let(:result) { client.locks.lock_door(device) }
+        let(:result) { client.locks.lock_door(device_id: device_id) }
 
         it "returns an action attempt" do
           expect(result).to be_a(Seam::ActionAttempt)
