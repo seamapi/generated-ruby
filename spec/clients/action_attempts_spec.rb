@@ -13,7 +13,7 @@ RSpec.describe Seam::Clients::AccessCodes do
       ).with { |req| req.body.source == {action_attempt_id: action_attempt_id}.to_json }
     end
 
-    let(:result) { client.action_attempts.get(action_attempt_id) }
+    let(:result) { client.action_attempts.get(action_attempt_id: action_attempt_id) }
 
     it "returns a Device" do
       expect(result).to be_a(Seam::ActionAttempt)
