@@ -14,7 +14,7 @@ RSpec.describe Seam::Clients::DevicesUnmanaged do
         ).with { |req| req.body.source == {device_id: device_id}.to_json }
       end
 
-      let(:result) { client.unmanaged_devices.get(device_id) }
+      let(:result) { client.unmanaged_devices.get(device_id: device_id) }
 
       it "returns an unmanaged Device" do
         expect(result).to be_a(Seam::UnmanagedDevice)
@@ -60,7 +60,7 @@ RSpec.describe Seam::Clients::DevicesUnmanaged do
     let(:is_managed) { true }
 
     before do
-      stub_seam_request(:post, "/devices/unmanaged/update", {ok: true})
+      stub_seam_request(:post, "/devices/unmanaged/update", nil)
         .with do |req|
           req.body.source == {device_id: device_id, is_managed: is_managed}.to_json
         end
@@ -69,7 +69,7 @@ RSpec.describe Seam::Clients::DevicesUnmanaged do
     let(:response) { client.unmanaged_devices.update(device_id: device_id, is_managed: is_managed) }
 
     it "returns success" do
-      expect(response).to eq({"ok" => true})
+      expect(response).to be_a(NilClass)
     end
   end
 end
