@@ -26,10 +26,10 @@ RSpec.describe Seam::Clients::Workspaces do
     before do
       stub_seam_request(
         :post, "/workspaces/get", {workspace: workspace_hash}
-      ).with { |req| req.body.source == {workspace_id: workspace_id}.to_json }
+      )
     end
 
-    let(:result) { client.workspaces.get(workspace_id) }
+    let(:result) { client.workspaces.get }
 
     it "returns a Device" do
       expect(result).to be_a(Seam::Workspace)
@@ -41,14 +41,14 @@ RSpec.describe Seam::Clients::Workspaces do
 
     before do
       stub_seam_request(
-        :post, "/workspaces/reset_sandbox", {message: "ok"}
-      ).with { |req| req.body.source == {workspace_id: workspace_id}.to_json }
+        :post, "/workspaces/reset_sandbox", nil
+      )
     end
 
-    let(:result) { client.workspaces.reset_sandbox(workspace_id) }
+    let(:result) { client.workspaces.reset_sandbox }
 
     it "returns a Resets the Workspace" do
-      expect(result).to be_a(Hash)
+      expect(result).to be_a(NilClass)
     end
   end
 end
