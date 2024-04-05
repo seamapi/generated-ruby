@@ -16,10 +16,10 @@ module Seam
 
       raise ArgumentError, "SEAM_API_KEY not found in environment, and api_key not provided" if @api_key.to_s.empty?
 
-      return unless ENV["SEAM_API_URL"]
-
-      warn "Using the SEAM_API_URL environment variable is deprecated. " \
-           "Support will be removed in a later major version. Use SEAM_ENDPOINT instead."
+      if ENV["SEAM_API_URL"]
+        warn "Using the SEAM_API_URL environment variable is deprecated. " \
+             "Support will be removed in a later major version. Use SEAM_ENDPOINT instead."
+      end
     end
 
     def lts_version
