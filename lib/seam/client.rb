@@ -2,7 +2,7 @@
 
 module Seam
   class Client
-    attr_accessor :api_key, :base_uri, :debug, :wait_for_action_attempt
+    attr_accessor :api_key, :base_uri, :debug
 
     def self.lts_version
       Seam::LTS_VERSION
@@ -54,6 +54,10 @@ module Seam
       @events ||= Seam::Clients::Events.new(self)
     end
 
+    def health
+      @health ||= Seam::Clients::Health.new(self)
+    end
+
     def locks
       @locks ||= Seam::Clients::Locks.new(self)
     end
@@ -88,10 +92,6 @@ module Seam
 
     def noise_sensors
       @noise_sensors ||= Seam::Clients::NoiseSensors.new(self)
-    end
-
-    def health
-      request_seam(:get, "/health")
     end
 
     # @deprecated Please use {#devices.unmanaged} instead.
