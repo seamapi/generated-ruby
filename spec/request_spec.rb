@@ -12,15 +12,15 @@ RSpec.describe Seam::Client do
 
       before do
         stub_seam_request(
-          :post,
-          "/health/get_health",
+          :get,
+          "/health",
           {error: error},
           status: 400
         )
       end
 
       it "parses the error" do
-        expect { client.health.get_health }.to raise_error do |error|
+        expect { client.health }.to raise_error do |error|
           expect(error).to be_a(Seam::Request::Error)
           expect(error.message).to include(message).and include(type).and include(request_id)
         end
@@ -35,15 +35,15 @@ RSpec.describe Seam::Client do
 
       before do
         stub_seam_request(
-          :post,
-          "/health/get_health",
+          :get,
+          "/health",
           {error: error},
           status: 409
         )
       end
 
       it "parses the error" do
-        expect { client.health.get_health }.to raise_error do |error|
+        expect { client.health }.to raise_error do |error|
           expect(error).to be_a(Seam::Request::Error)
           expect(error.message).to include(message).and include(type).and include(request_id)
         end
