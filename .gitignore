@@ -66,3 +66,7 @@ build-iPhoneSimulator/
 # .rubocop-https?--*
 
 .vscode
+
+# Dependency directories
+node_modules/
+jspm_packages/
