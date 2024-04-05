@@ -31,6 +31,8 @@ jobs:
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Setup
         uses: ./.github/actions/setup
+      - name: Setup Node.js
+        uses: ./.github/actions/setup-node
       - name: Format
         run: bundle exec rake format
       - name: Format with Prettier
