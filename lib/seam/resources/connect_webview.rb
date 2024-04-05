@@ -2,7 +2,7 @@
 
 module Seam
   class ConnectWebview < BaseResource
-    attr_accessor :connect_webview_id, :connected_account_id, :url, :workspace_id, :device_selection_mode, :accepted_providers, :accepted_devices, :any_provider_allowed, :any_device_allowed, :login_successful, :status, :custom_redirect_url, :custom_redirect_failure_url, :custom_metadata, :automatically_manage_new_devices, :wait_for_device_creation, :selected_provider
+    attr_accessor :connect_webview_id, :workspace_id, :connected_account_id, :url, :device_selection_mode, :accepted_providers, :accepted_devices, :any_provider_allowed, :any_device_allowed, :login_successful, :status, :custom_redirect_url, :custom_redirect_failure_url, :custom_metadata, :automatically_manage_new_devices, :wait_for_device_creation, :selected_provider
 
     date_accessor :created_at, :authorized_at
   end

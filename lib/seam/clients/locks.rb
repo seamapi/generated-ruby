@@ -13,13 +13,13 @@ module Seam
         )
       end
 
-      def list(connected_account_id: nil, connected_account_ids: nil, connect_webview_id: nil, device_types: nil, manufacturer: nil, device_ids: nil, limit: nil, created_before: nil, user_identifier_key: nil, custom_metadata_has: nil)
+      def list(connected_account_id: nil, connected_account_ids: nil, connect_webview_id: nil, device_types: nil, manufacturer: nil, device_ids: nil, limit: nil, created_before: nil, user_identifier_key: nil, custom_metadata_has: nil, include_if: nil, exclude_if: nil)
         request_seam_object(
           :post,
           "/locks/list",
           Seam::Device,
           "devices",
-          body: {connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, connect_webview_id: connect_webview_id, device_types: device_types, manufacturer: manufacturer, device_ids: device_ids, limit: limit, created_before: created_before, user_identifier_key: user_identifier_key, custom_metadata_has: custom_metadata_has}.compact
+          body: {connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, connect_webview_id: connect_webview_id, device_types: device_types, manufacturer: manufacturer, device_ids: device_ids, limit: limit, created_before: created_before, user_identifier_key: user_identifier_key, custom_metadata_has: custom_metadata_has, include_if: include_if, exclude_if: exclude_if}.compact
         )
       end
 
