@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "./scripts/generate.sh",
+    "generate": "node ./scripts/generate.js",
     "format": "prettier --write --ignore-path .gitignore .",
     "preformat": "bundle exec rake format"
   },
