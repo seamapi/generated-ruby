@@ -50,22 +50,22 @@ RSpec.describe Seam::Clients::ConnectWebviews do
         :post, "/connect_webviews/create", {connect_webview: connect_webview_hash}
       ).with do |req|
         req.body.source == {
-          device_selection_mode: device_selection_mode,
-          custom_redirect_url: custom_redirect_url,
-          custom_redirect_failure_url: custom_redirect_failure_url,
           accepted_providers: accepted_providers,
-          automatically_manage_new_devices: automatically_manage_new_devices
+          automatically_manage_new_devices: automatically_manage_new_devices,
+          custom_redirect_failure_url: custom_redirect_failure_url,
+          custom_redirect_url: custom_redirect_url,
+          device_selection_mode: device_selection_mode
         }.to_json
       end
     end
 
     let(:result) do
       client.connect_webviews.create(
-        device_selection_mode: device_selection_mode,
-        custom_redirect_url: custom_redirect_url,
-        custom_redirect_failure_url: custom_redirect_failure_url,
         accepted_providers: accepted_providers,
-        automatically_manage_new_devices: automatically_manage_new_devices
+        automatically_manage_new_devices: automatically_manage_new_devices,
+        custom_redirect_failure_url: custom_redirect_failure_url,
+        custom_redirect_url: custom_redirect_url,
+        device_selection_mode: device_selection_mode
       )
     end
 
