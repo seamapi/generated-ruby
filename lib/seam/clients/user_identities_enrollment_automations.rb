@@ -14,13 +14,13 @@ module Seam
       end
 
       def get(enrollment_automation_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/enrollment_automations/get",
+          Seam::EnrollmentAutomation,
+          "enrollment_automation",
           body: {enrollment_automation_id: enrollment_automation_id}.compact
         )
-
-        nil
       end
 
       def launch(user_identity_id:, credential_manager_acs_system_id:, acs_credential_pool_id: nil, create_credential_manager_user: nil, credential_manager_acs_user_id: nil)
@@ -34,13 +34,13 @@ module Seam
       end
 
       def list(user_identity_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/enrollment_automations/list",
+          Seam::EnrollmentAutomation,
+          "enrollment_automations",
           body: {user_identity_id: user_identity_id}.compact
         )
-
-        nil
       end
     end
   end

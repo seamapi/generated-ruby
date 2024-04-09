@@ -4,23 +4,23 @@ module Seam
   module Clients
     class Networks < BaseClient
       def get(network_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/networks/get",
+          Seam::Network,
+          "network",
           body: {network_id: network_id}.compact
         )
-
-        nil
       end
 
       def list
-        request_seam(
+        request_seam_object(
           :post,
           "/networks/list",
+          Seam::Network,
+          "networks",
           body: {}.compact
         )
-
-        nil
       end
     end
   end

@@ -14,13 +14,13 @@ module Seam
       end
 
       def create(acs_system_id:, acs_access_group_ids: nil, user_identity_id: nil, access_schedule: nil, full_name: nil, email: nil, phone_number: nil, email_address: nil)
-        request_seam(
+        request_seam_object(
           :post,
           "/acs/users/create",
+          Seam::AcsUser,
+          "acs_user",
           body: {acs_system_id: acs_system_id, acs_access_group_ids: acs_access_group_ids, user_identity_id: user_identity_id, access_schedule: access_schedule, full_name: full_name, email: email, phone_number: phone_number, email_address: email_address}.compact
         )
-
-        nil
       end
 
       def delete(acs_user_id:)
@@ -34,33 +34,33 @@ module Seam
       end
 
       def get(acs_user_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/acs/users/get",
+          Seam::AcsUser,
+          "acs_user",
           body: {acs_user_id: acs_user_id}.compact
         )
-
-        nil
       end
 
       def list(user_identity_id: nil, user_identity_phone_number: nil, user_identity_email_address: nil, acs_system_id: nil)
-        request_seam(
+        request_seam_object(
           :post,
           "/acs/users/list",
+          Seam::AcsUser,
+          "acs_users",
           body: {user_identity_id: user_identity_id, user_identity_phone_number: user_identity_phone_number, user_identity_email_address: user_identity_email_address, acs_system_id: acs_system_id}.compact
         )
-
-        nil
       end
 
       def list_accessible_entrances(acs_user_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/acs/users/list_accessible_entrances",
+          Seam::AcsEntrance,
+          "acs_entrances",
           body: {acs_user_id: acs_user_id}.compact
         )
-
-        nil
       end
 
       def remove_from_access_group(acs_user_id:, acs_access_group_id:)

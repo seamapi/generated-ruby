@@ -18,13 +18,13 @@ module Seam
       end
 
       def create(user_identity_key: nil, email_address: nil, phone_number: nil, full_name: nil)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/create",
+          Seam::UserIdentity,
+          "user_identity",
           body: {user_identity_key: user_identity_key, email_address: email_address, phone_number: phone_number, full_name: full_name}.compact
         )
-
-        nil
       end
 
       def delete(user_identity_id:)
@@ -38,13 +38,13 @@ module Seam
       end
 
       def get(user_identity_id: nil, user_identity_key: nil)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/get",
+          Seam::UserIdentity,
+          "user_identity",
           body: {user_identity_id: user_identity_id, user_identity_key: user_identity_key}.compact
         )
-
-        nil
       end
 
       def grant_access_to_device(user_identity_id:, device_id:)
@@ -58,43 +58,43 @@ module Seam
       end
 
       def list(credential_manager_acs_system_id: nil)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/list",
+          Seam::UserIdentity,
+          "user_identities",
           body: {credential_manager_acs_system_id: credential_manager_acs_system_id}.compact
         )
-
-        nil
       end
 
       def list_accessible_devices(user_identity_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/list_accessible_devices",
+          Seam::Device,
+          "devices",
           body: {user_identity_id: user_identity_id}.compact
         )
-
-        nil
       end
 
       def list_acs_systems(user_identity_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/list_acs_systems",
+          Seam::AcsSystem,
+          "acs_systems",
           body: {user_identity_id: user_identity_id}.compact
         )
-
-        nil
       end
 
       def list_acs_users(user_identity_id:)
-        request_seam(
+        request_seam_object(
           :post,
           "/user_identities/list_acs_users",
+          Seam::AcsUser,
+          "acs_users",
           body: {user_identity_id: user_identity_id}.compact
         )
-
-        nil
       end
 
       def remove_acs_user(user_identity_id:, acs_user_id:)
