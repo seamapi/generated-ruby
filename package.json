@@ -4,11 +4,13 @@
   "type": "module",
   "scripts": {
     "generate": "./scripts/generate.sh",
-    "format": "prettier --write --ignore-path .gitignore ."
+    "format": "prettier --write --ignore-path .gitignore .",
+    "preformat": "bundle exec rake format"
   },
   "devDependencies": {
-    "@seamapi/nextlove-sdk-generator": "1.7.12",
-    "@seamapi/types": "1.149.0",
+    "@seamapi/nextlove-sdk-generator": "1.8.1",
+    "@seamapi/types": "1.154.0",
+    "del": "^7.1.0",
     "prettier": "^3.2.5"
   }
 }

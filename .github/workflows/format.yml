@@ -34,8 +34,6 @@ jobs:
       - name: Setup Node.js
         uses: ./.github/actions/setup-node
       - name: Format
-        run: bundle exec rake format
-      - name: Format with Prettier
         run: npm run format
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
