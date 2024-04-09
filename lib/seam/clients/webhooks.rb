@@ -43,11 +43,11 @@ module Seam
         )
       end
 
-      def update(webhook_id:, event_types:)
+      def update(event_types:, webhook_id:)
         request_seam(
           :post,
           "/webhooks/update",
-          body: {webhook_id: webhook_id, event_types: event_types}.compact
+          body: {event_types: event_types, webhook_id: webhook_id}.compact
         )
 
         nil

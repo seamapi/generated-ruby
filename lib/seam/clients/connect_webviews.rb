@@ -3,13 +3,13 @@
 module Seam
   module Clients
     class ConnectWebviews < BaseClient
-      def create(device_selection_mode: nil, custom_redirect_url: nil, custom_redirect_failure_url: nil, accepted_providers: nil, provider_category: nil, custom_metadata: nil, automatically_manage_new_devices: nil, wait_for_device_creation: nil)
+      def create(accepted_providers: nil, automatically_manage_new_devices: nil, custom_metadata: nil, custom_redirect_failure_url: nil, custom_redirect_url: nil, device_selection_mode: nil, provider_category: nil, wait_for_device_creation: nil)
         request_seam_object(
           :post,
           "/connect_webviews/create",
           Seam::ConnectWebview,
           "connect_webview",
-          body: {device_selection_mode: device_selection_mode, custom_redirect_url: custom_redirect_url, custom_redirect_failure_url: custom_redirect_failure_url, accepted_providers: accepted_providers, provider_category: provider_category, custom_metadata: custom_metadata, automatically_manage_new_devices: automatically_manage_new_devices, wait_for_device_creation: wait_for_device_creation}.compact
+          body: {accepted_providers: accepted_providers, automatically_manage_new_devices: automatically_manage_new_devices, custom_metadata: custom_metadata, custom_redirect_failure_url: custom_redirect_failure_url, custom_redirect_url: custom_redirect_url, device_selection_mode: device_selection_mode, provider_category: provider_category, wait_for_device_creation: wait_for_device_creation}.compact
         )
       end
 
@@ -33,13 +33,13 @@ module Seam
         )
       end
 
-      def list(user_identifier_key: nil, custom_metadata_has: nil)
+      def list(custom_metadata_has: nil, user_identifier_key: nil)
         request_seam_object(
           :post,
           "/connect_webviews/list",
           Seam::ConnectWebview,
           "connect_webviews",
-          body: {user_identifier_key: user_identifier_key, custom_metadata_has: custom_metadata_has}.compact
+          body: {custom_metadata_has: custom_metadata_has, user_identifier_key: user_identifier_key}.compact
         )
       end
     end

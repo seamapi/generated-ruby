@@ -2,7 +2,7 @@
 
 module Seam
   class ActionAttempt < BaseResource
-    attr_accessor :status, :action_type, :action_attempt_id, :result, :error
+    attr_accessor :action_attempt_id, :action_type, :error, :result, :status
 
     def decide_and_wait(wait_for_action_attempt)
       wait_decision = wait_for_action_attempt.nil? ? @client.wait_for_action_attempt : wait_for_action_attempt

@@ -2,6 +2,6 @@
 
 module Seam
   class Webhook < BaseResource
-    attr_accessor :webhook_id, :url, :event_types, :secret
+    attr_accessor :event_types, :secret, :url, :webhook_id
   end
 end

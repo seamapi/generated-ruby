@@ -2,6 +2,6 @@
 
 module Seam
   class ServiceHealth < BaseResource
-    attr_accessor :service, :status, :description
+    attr_accessor :description, :service, :status
   end
 end

@@ -3,13 +3,13 @@
 module Seam
   module Clients
     class Workspaces < BaseClient
-      def create(name:, connect_partner_name:, is_sandbox: nil, webview_primary_button_color: nil, webview_logo_shape: nil)
+      def create(connect_partner_name:, name:, is_sandbox: nil, webview_logo_shape: nil, webview_primary_button_color: nil)
         request_seam_object(
           :post,
           "/workspaces/create",
           Seam::Workspace,
           "workspace",
-          body: {name: name, connect_partner_name: connect_partner_name, is_sandbox: is_sandbox, webview_primary_button_color: webview_primary_button_color, webview_logo_shape: webview_logo_shape}.compact
+          body: {connect_partner_name: connect_partner_name, name: name, is_sandbox: is_sandbox, webview_logo_shape: webview_logo_shape, webview_primary_button_color: webview_primary_button_color}.compact
         )
       end
 

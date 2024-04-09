@@ -43,26 +43,26 @@ module Seam
         action_attempt
       end
 
-      def heat_cool(device_id:, heating_set_point_celsius: nil, heating_set_point_fahrenheit: nil, cooling_set_point_celsius: nil, cooling_set_point_fahrenheit: nil, sync: nil, wait_for_action_attempt: nil)
+      def heat_cool(device_id:, cooling_set_point_celsius: nil, cooling_set_point_fahrenheit: nil, heating_set_point_celsius: nil, heating_set_point_fahrenheit: nil, sync: nil, wait_for_action_attempt: nil)
         action_attempt = request_seam_object(
           :post,
           "/thermostats/heat_cool",
           Seam::ActionAttempt,
           "action_attempt",
-          body: {device_id: device_id, heating_set_point_celsius: heating_set_point_celsius, heating_set_point_fahrenheit: heating_set_point_fahrenheit, cooling_set_point_celsius: cooling_set_point_celsius, cooling_set_point_fahrenheit: cooling_set_point_fahrenheit, sync: sync}.compact
+          body: {device_id: device_id, cooling_set_point_celsius: cooling_set_point_celsius, cooling_set_point_fahrenheit: cooling_set_point_fahrenheit, heating_set_point_celsius: heating_set_point_celsius, heating_set_point_fahrenheit: heating_set_point_fahrenheit, sync: sync}.compact
         )
 
         action_attempt.decide_and_wait(wait_for_action_attempt)
         action_attempt
       end
 
-      def list(connected_account_id: nil, connected_account_ids: nil, connect_webview_id: nil, device_types: nil, manufacturer: nil, device_ids: nil, limit: nil, created_before: nil, user_identifier_key: nil, custom_metadata_has: nil, include_if: nil, exclude_if: nil)
+      def list(connect_webview_id: nil, connected_account_id: nil, connected_account_ids: nil, created_before: nil, custom_metadata_has: nil, device_ids: nil, device_types: nil, exclude_if: nil, include_if: nil, limit: nil, manufacturer: nil, user_identifier_key: nil)
         request_seam_object(
           :post,
           "/thermostats/list",
           Seam::Device,
           "thermostats",
-          body: {connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, connect_webview_id: connect_webview_id, device_types: device_types, manufacturer: manufacturer, device_ids: device_ids, limit: limit, created_before: created_before, user_identifier_key: user_identifier_key, custom_metadata_has: custom_metadata_has, include_if: include_if, exclude_if: exclude_if}.compact
+          body: {connect_webview_id: connect_webview_id, connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, created_before: created_before, custom_metadata_has: custom_metadata_has, device_ids: device_ids, device_types: device_types, exclude_if: exclude_if, include_if: include_if, limit: limit, manufacturer: manufacturer, user_identifier_key: user_identifier_key}.compact
         )
       end
 
@@ -92,11 +92,11 @@ module Seam
         action_attempt
       end
 
-      def update(device_id:, default_climate_setting:)
+      def update(default_climate_setting:, device_id:)
         request_seam(
           :post,
           "/thermostats/update",
-          body: {device_id: device_id, default_climate_setting: default_climate_setting}.compact
+          body: {default_climate_setting: default_climate_setting, device_id: device_id}.compact
         )
 
         nil

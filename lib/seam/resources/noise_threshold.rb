@@ -2,6 +2,6 @@
 
 module Seam
   class NoiseThreshold < BaseResource
-    attr_accessor :noise_threshold_id, :device_id, :name, :noise_threshold_nrs, :starts_daily_at, :ends_daily_at, :noise_threshold_decibels
+    attr_accessor :device_id, :ends_daily_at, :name, :noise_threshold_decibels, :noise_threshold_id, :noise_threshold_nrs, :starts_daily_at
   end
 end

@@ -7,23 +7,23 @@ module Seam
         @enrollment_automations ||= Seam::Clients::UserIdentitiesEnrollmentAutomations.new(self)
       end
 
-      def add_acs_user(user_identity_id:, acs_user_id:)
+      def add_acs_user(acs_user_id:, user_identity_id:)
         request_seam(
           :post,
           "/user_identities/add_acs_user",
-          body: {user_identity_id: user_identity_id, acs_user_id: acs_user_id}.compact
+          body: {acs_user_id: acs_user_id, user_identity_id: user_identity_id}.compact
         )
 
         nil
       end
 
-      def create(user_identity_key: nil, email_address: nil, phone_number: nil, full_name: nil)
+      def create(email_address: nil, full_name: nil, phone_number: nil, user_identity_key: nil)
         request_seam_object(
           :post,
           "/user_identities/create",
           Seam::UserIdentity,
           "user_identity",
-          body: {user_identity_key: user_identity_key, email_address: email_address, phone_number: phone_number, full_name: full_name}.compact
+          body: {email_address: email_address, full_name: full_name, phone_number: phone_number, user_identity_key: user_identity_key}.compact
         )
       end
 
@@ -47,11 +47,11 @@ module Seam
         )
       end
 
-      def grant_access_to_device(user_identity_id:, device_id:)
+      def grant_access_to_device(device_id:, user_identity_id:)
         request_seam(
           :post,
           "/user_identities/grant_access_to_device",
-          body: {user_identity_id: user_identity_id, device_id: device_id}.compact
+          body: {device_id: device_id, user_identity_id: user_identity_id}.compact
         )
 
         nil
@@ -97,31 +97,31 @@ module Seam
         )
       end
 
-      def remove_acs_user(user_identity_id:, acs_user_id:)
+      def remove_acs_user(acs_user_id:, user_identity_id:)
         request_seam(
           :post,
           "/user_identities/remove_acs_user",
-          body: {user_identity_id: user_identity_id, acs_user_id: acs_user_id}.compact
+          body: {acs_user_id: acs_user_id, user_identity_id: user_identity_id}.compact
         )
 
         nil
       end
 
-      def revoke_access_to_device(user_identity_id:, device_id:)
+      def revoke_access_to_device(device_id:, user_identity_id:)
         request_seam(
           :post,
           "/user_identities/revoke_access_to_device",
-          body: {user_identity_id: user_identity_id, device_id: device_id}.compact
+          body: {device_id: device_id, user_identity_id: user_identity_id}.compact
         )
 
         nil
       end
 
-      def update(user_identity_id:, user_identity_key: nil, email_address: nil, phone_number: nil, full_name: nil)
+      def update(user_identity_id:, email_address: nil, full_name: nil, phone_number: nil, user_identity_key: nil)
         request_seam(
           :post,
           "/user_identities/update",
-          body: {user_identity_id: user_identity_id, user_identity_key: user_identity_key, email_address: email_address, phone_number: phone_number, full_name: full_name}.compact
+          body: {user_identity_id: user_identity_id, email_address: email_address, full_name: full_name, phone_number: phone_number, user_identity_key: user_identity_key}.compact
         )
 
         nil

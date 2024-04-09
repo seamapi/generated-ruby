@@ -11,23 +11,23 @@ module Seam
         @unmanaged ||= Seam::Clients::AccessCodesUnmanaged.new(self)
       end
 
-      def create(device_id:, name: nil, starts_at: nil, ends_at: nil, code: nil, sync: nil, attempt_for_offline_device: nil, common_code_key: nil, prefer_native_scheduling: nil, use_backup_access_code_pool: nil, allow_external_modification: nil, is_external_modification_allowed: nil, use_offline_access_code: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil)
+      def create(device_id:, allow_external_modification: nil, attempt_for_offline_device: nil, code: nil, common_code_key: nil, ends_at: nil, is_external_modification_allowed: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil, name: nil, prefer_native_scheduling: nil, starts_at: nil, sync: nil, use_backup_access_code_pool: nil, use_offline_access_code: nil)
         request_seam_object(
           :post,
           "/access_codes/create",
           Seam::AccessCode,
           "access_code",
-          body: {device_id: device_id, name: name, starts_at: starts_at, ends_at: ends_at, code: code, sync: sync, attempt_for_offline_device: attempt_for_offline_device, common_code_key: common_code_key, prefer_native_scheduling: prefer_native_scheduling, use_backup_access_code_pool: use_backup_access_code_pool, allow_external_modification: allow_external_modification, is_external_modification_allowed: is_external_modification_allowed, use_offline_access_code: use_offline_access_code, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding}.compact
+          body: {device_id: device_id, allow_external_modification: allow_external_modification, attempt_for_offline_device: attempt_for_offline_device, code: code, common_code_key: common_code_key, ends_at: ends_at, is_external_modification_allowed: is_external_modification_allowed, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding, name: name, prefer_native_scheduling: prefer_native_scheduling, starts_at: starts_at, sync: sync, use_backup_access_code_pool: use_backup_access_code_pool, use_offline_access_code: use_offline_access_code}.compact
         )
       end
 
-      def create_multiple(device_ids:, behavior_when_code_cannot_be_shared: nil, preferred_code_length: nil, name: nil, starts_at: nil, ends_at: nil, code: nil, attempt_for_offline_device: nil, prefer_native_scheduling: nil, use_backup_access_code_pool: nil, allow_external_modification: nil, is_external_modification_allowed: nil, use_offline_access_code: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil)
+      def create_multiple(device_ids:, allow_external_modification: nil, attempt_for_offline_device: nil, behavior_when_code_cannot_be_shared: nil, code: nil, ends_at: nil, is_external_modification_allowed: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil, name: nil, prefer_native_scheduling: nil, preferred_code_length: nil, starts_at: nil, use_backup_access_code_pool: nil, use_offline_access_code: nil)
         request_seam_object(
           :post,
           "/access_codes/create_multiple",
           Seam::AccessCode,
           "access_codes",
-          body: {device_ids: device_ids, behavior_when_code_cannot_be_shared: behavior_when_code_cannot_be_shared, preferred_code_length: preferred_code_length, name: name, starts_at: starts_at, ends_at: ends_at, code: code, attempt_for_offline_device: attempt_for_offline_device, prefer_native_scheduling: prefer_native_scheduling, use_backup_access_code_pool: use_backup_access_code_pool, allow_external_modification: allow_external_modification, is_external_modification_allowed: is_external_modification_allowed, use_offline_access_code: use_offline_access_code, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding}.compact
+          body: {device_ids: device_ids, allow_external_modification: allow_external_modification, attempt_for_offline_device: attempt_for_offline_device, behavior_when_code_cannot_be_shared: behavior_when_code_cannot_be_shared, code: code, ends_at: ends_at, is_external_modification_allowed: is_external_modification_allowed, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding, name: name, prefer_native_scheduling: prefer_native_scheduling, preferred_code_length: preferred_code_length, starts_at: starts_at, use_backup_access_code_pool: use_backup_access_code_pool, use_offline_access_code: use_offline_access_code}.compact
         )
       end
 
@@ -53,23 +53,23 @@ module Seam
         )
       end
 
-      def get(device_id: nil, access_code_id: nil, code: nil)
+      def get(access_code_id: nil, code: nil, device_id: nil)
         request_seam_object(
           :post,
           "/access_codes/get",
           Seam::AccessCode,
           "access_code",
-          body: {device_id: device_id, access_code_id: access_code_id, code: code}.compact
+          body: {access_code_id: access_code_id, code: code, device_id: device_id}.compact
         )
       end
 
-      def list(device_id: nil, access_code_ids: nil, user_identifier_key: nil)
+      def list(access_code_ids: nil, device_id: nil, user_identifier_key: nil)
         request_seam_object(
           :post,
           "/access_codes/list",
           Seam::AccessCode,
           "access_codes",
-          body: {device_id: device_id, access_code_ids: access_code_ids, user_identifier_key: user_identifier_key}.compact
+          body: {access_code_ids: access_code_ids, device_id: device_id, user_identifier_key: user_identifier_key}.compact
         )
       end
 
@@ -83,13 +83,13 @@ module Seam
         )
       end
 
-      def update(access_code_id:, name: nil, starts_at: nil, ends_at: nil, code: nil, sync: nil, attempt_for_offline_device: nil, prefer_native_scheduling: nil, use_backup_access_code_pool: nil, allow_external_modification: nil, is_external_modification_allowed: nil, use_offline_access_code: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil, device_id: nil, type: nil, is_managed: nil)
+      def update(access_code_id:, allow_external_modification: nil, attempt_for_offline_device: nil, code: nil, device_id: nil, ends_at: nil, is_external_modification_allowed: nil, is_managed: nil, is_offline_access_code: nil, is_one_time_use: nil, max_time_rounding: nil, name: nil, prefer_native_scheduling: nil, starts_at: nil, sync: nil, type: nil, use_backup_access_code_pool: nil, use_offline_access_code: nil)
         request_seam_object(
           :post,
           "/access_codes/update",
           Seam::ActionAttempt,
           "action_attempt",
-          body: {access_code_id: access_code_id, name: name, starts_at: starts_at, ends_at: ends_at, code: code, sync: sync, attempt_for_offline_device: attempt_for_offline_device, prefer_native_scheduling: prefer_native_scheduling, use_backup_access_code_pool: use_backup_access_code_pool, allow_external_modification: allow_external_modification, is_external_modification_allowed: is_external_modification_allowed, use_offline_access_code: use_offline_access_code, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding, device_id: device_id, type: type, is_managed: is_managed}.compact
+          body: {access_code_id: access_code_id, allow_external_modification: allow_external_modification, attempt_for_offline_device: attempt_for_offline_device, code: code, device_id: device_id, ends_at: ends_at, is_external_modification_allowed: is_external_modification_allowed, is_managed: is_managed, is_offline_access_code: is_offline_access_code, is_one_time_use: is_one_time_use, max_time_rounding: max_time_rounding, name: name, prefer_native_scheduling: prefer_native_scheduling, starts_at: starts_at, sync: sync, type: type, use_backup_access_code_pool: use_backup_access_code_pool, use_offline_access_code: use_offline_access_code}.compact
         )
 
         nil

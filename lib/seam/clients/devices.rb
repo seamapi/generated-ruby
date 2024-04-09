@@ -31,13 +31,13 @@ module Seam
         )
       end
 
-      def list(connected_account_id: nil, connected_account_ids: nil, connect_webview_id: nil, device_types: nil, manufacturer: nil, device_ids: nil, limit: nil, created_before: nil, user_identifier_key: nil, custom_metadata_has: nil, include_if: nil, exclude_if: nil)
+      def list(connect_webview_id: nil, connected_account_id: nil, connected_account_ids: nil, created_before: nil, custom_metadata_has: nil, device_ids: nil, device_types: nil, exclude_if: nil, include_if: nil, limit: nil, manufacturer: nil, user_identifier_key: nil)
         request_seam_object(
           :post,
           "/devices/list",
           Seam::Device,
           "devices",
-          body: {connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, connect_webview_id: connect_webview_id, device_types: device_types, manufacturer: manufacturer, device_ids: device_ids, limit: limit, created_before: created_before, user_identifier_key: user_identifier_key, custom_metadata_has: custom_metadata_has, include_if: include_if, exclude_if: exclude_if}.compact
+          body: {connect_webview_id: connect_webview_id, connected_account_id: connected_account_id, connected_account_ids: connected_account_ids, created_before: created_before, custom_metadata_has: custom_metadata_has, device_ids: device_ids, device_types: device_types, exclude_if: exclude_if, include_if: include_if, limit: limit, manufacturer: manufacturer, user_identifier_key: user_identifier_key}.compact
         )
       end
 
@@ -51,11 +51,11 @@ module Seam
         )
       end
 
-      def update(device_id:, properties: nil, name: nil, is_managed: nil, custom_metadata: nil)
+      def update(device_id:, custom_metadata: nil, is_managed: nil, name: nil, properties: nil)
         request_seam(
           :post,
           "/devices/update",
-          body: {device_id: device_id, properties: properties, name: name, is_managed: is_managed, custom_metadata: custom_metadata}.compact
+          body: {device_id: device_id, custom_metadata: custom_metadata, is_managed: is_managed, name: name, properties: properties}.compact
         )
 
         nil

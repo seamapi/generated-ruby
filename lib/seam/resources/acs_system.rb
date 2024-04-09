@@ -2,7 +2,7 @@
 
 module Seam
   class AcsSystem < BaseResource
-    attr_accessor :acs_system_id, :external_type, :external_type_display_name, :system_type, :system_type_display_name, :name, :workspace_id, :connected_account_ids, :image_url, :image_alt_text, :can_automate_enrollment
+    attr_accessor :acs_system_id, :can_automate_enrollment, :connected_account_ids, :external_type, :external_type_display_name, :image_alt_text, :image_url, :name, :system_type, :system_type_display_name, :workspace_id
 
     date_accessor :created_at
   end

@@ -2,7 +2,7 @@
 
 module Seam
   class ConnectedAccount < BaseResource
-    attr_accessor :connected_account_id, :user_identifier, :account_type, :account_type_display_name, :custom_metadata, :automatically_manage_new_devices
+    attr_accessor :account_type, :account_type_display_name, :automatically_manage_new_devices, :connected_account_id, :custom_metadata, :user_identifier
 
     date_accessor :created_at
 

@@ -30,6 +30,10 @@ module Seam
       @access_codes ||= Seam::Clients::AccessCodes.new(self)
     end
 
+    def acs
+      @acs ||= Seam::Clients::Acs.new(self)
+    end
+
     def action_attempts
       @action_attempts ||= Seam::Clients::ActionAttempts.new(self)
     end
@@ -62,6 +66,10 @@ module Seam
       @networks ||= Seam::Clients::Networks.new(self)
     end
 
+    def noise_sensors
+      @noise_sensors ||= Seam::Clients::NoiseSensors.new(self)
+    end
+
     def phones
       @phones ||= Seam::Clients::Phones.new(self)
     end
@@ -80,14 +88,6 @@ module Seam
 
     def workspaces
       @workspaces ||= Seam::Clients::Workspaces.new(self)
-    end
-
-    def acs
-      @acs ||= Seam::Clients::Acs.new(self)
-    end
-
-    def noise_sensors
-      @noise_sensors ||= Seam::Clients::NoiseSensors.new(self)
     end
 
     def health

@@ -2,7 +2,7 @@
 
 module Seam
   class Phone < BaseResource
-    attr_accessor :device_id, :device_type, :nickname, :display_name, :capabilities_supported, :properties, :location, :workspace_id, :is_managed, :custom_metadata, :can_remotely_unlock, :can_remotely_lock, :can_program_online_access_codes, :can_simulate_removal
+    attr_accessor :can_program_online_access_codes, :can_remotely_lock, :can_remotely_unlock, :can_simulate_removal, :capabilities_supported, :custom_metadata, :device_id, :device_type, :display_name, :is_managed, :location, :nickname, :properties, :workspace_id
 
     date_accessor :created_at
 

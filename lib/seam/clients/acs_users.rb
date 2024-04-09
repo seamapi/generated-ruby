@@ -3,23 +3,23 @@
 module Seam
   module Clients
     class AcsUsers < BaseClient
-      def add_to_access_group(acs_user_id:, acs_access_group_id:)
+      def add_to_access_group(acs_access_group_id:, acs_user_id:)
         request_seam(
           :post,
           "/acs/users/add_to_access_group",
-          body: {acs_user_id: acs_user_id, acs_access_group_id: acs_access_group_id}.compact
+          body: {acs_access_group_id: acs_access_group_id, acs_user_id: acs_user_id}.compact
         )
 
         nil
       end
 
-      def create(acs_system_id:, acs_access_group_ids: nil, user_identity_id: nil, access_schedule: nil, full_name: nil, email: nil, phone_number: nil, email_address: nil)
+      def create(acs_system_id:, access_schedule: nil, acs_access_group_ids: nil, email: nil, email_address: nil, full_name: nil, phone_number: nil, user_identity_id: nil)
         request_seam_object(
           :post,
           "/acs/users/create",
           Seam::AcsUser,
           "acs_user",
-          body: {acs_system_id: acs_system_id, acs_access_group_ids: acs_access_group_ids, user_identity_id: user_identity_id, access_schedule: access_schedule, full_name: full_name, email: email, phone_number: phone_number, email_address: email_address}.compact
+          body: {acs_system_id: acs_system_id, access_schedule: access_schedule, acs_access_group_ids: acs_access_group_ids, email: email, email_address: email_address, full_name: full_name, phone_number: phone_number, user_identity_id: user_identity_id}.compact
         )
       end
 
@@ -43,13 +43,13 @@ module Seam
         )
       end
 
-      def list(user_identity_id: nil, user_identity_phone_number: nil, user_identity_email_address: nil, acs_system_id: nil)
+      def list(acs_system_id: nil, user_identity_email_address: nil, user_identity_id: nil, user_identity_phone_number: nil)
         request_seam_object(
           :post,
           "/acs/users/list",
           Seam::AcsUser,
           "acs_users",
-          body: {user_identity_id: user_identity_id, user_identity_phone_number: user_identity_phone_number, user_identity_email_address: user_identity_email_address, acs_system_id: acs_system_id}.compact
+          body: {acs_system_id: acs_system_id, user_identity_email_address: user_identity_email_address, user_identity_id: user_identity_id, user_identity_phone_number: user_identity_phone_number}.compact
         )
       end
 
@@ -63,11 +63,11 @@ module Seam
         )
       end
 
-      def remove_from_access_group(acs_user_id:, acs_access_group_id:)
+      def remove_from_access_group(acs_access_group_id:, acs_user_id:)
         request_seam(
           :post,
           "/acs/users/remove_from_access_group",
-          body: {acs_user_id: acs_user_id, acs_access_group_id: acs_access_group_id}.compact
+          body: {acs_access_group_id: acs_access_group_id, acs_user_id: acs_user_id}.compact
         )
 
         nil
@@ -103,11 +103,11 @@ module Seam
         nil
       end
 
-      def update(acs_user_id:, access_schedule: nil, full_name: nil, email: nil, phone_number: nil, email_address: nil, hid_acs_system_id: nil)
+      def update(acs_user_id:, access_schedule: nil, email: nil, email_address: nil, full_name: nil, hid_acs_system_id: nil, phone_number: nil)
         request_seam(
           :post,
           "/acs/users/update",
-          body: {acs_user_id: acs_user_id, access_schedule: access_schedule, full_name: full_name, email: email, phone_number: phone_number, email_address: email_address, hid_acs_system_id: hid_acs_system_id}.compact
+          body: {acs_user_id: acs_user_id, access_schedule: access_schedule, email: email, email_address: email_address, full_name: full_name, hid_acs_system_id: hid_acs_system_id, phone_number: phone_number}.compact
         )
 
         nil

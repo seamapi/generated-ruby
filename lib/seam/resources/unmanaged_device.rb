@@ -2,7 +2,7 @@
 
 module Seam
   class UnmanagedDevice < BaseResource
-    attr_accessor :device_id, :device_type, :connected_account_id, :capabilities_supported, :workspace_id, :is_managed, :properties, :can_remotely_unlock, :can_remotely_lock, :can_program_online_access_codes, :can_simulate_removal
+    attr_accessor :can_program_online_access_codes, :can_remotely_lock, :can_remotely_unlock, :can_simulate_removal, :capabilities_supported, :connected_account_id, :device_id, :device_type, :is_managed, :properties, :workspace_id
 
     date_accessor :created_at
 

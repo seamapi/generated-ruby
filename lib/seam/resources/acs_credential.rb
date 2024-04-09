@@ -2,7 +2,7 @@
 
 module Seam
   class AcsCredential < BaseResource
-    attr_accessor :acs_credential_id, :acs_user_id, :acs_credential_pool_id, :acs_system_id, :parent_acs_credential_id, :display_name, :code, :access_method, :external_type, :external_type_display_name, :workspace_id, :starts_at, :ends_at, :is_multi_phone_sync_credential, :visionline_metadata
+    attr_accessor :access_method, :acs_credential_id, :acs_credential_pool_id, :acs_system_id, :acs_user_id, :code, :display_name, :ends_at, :external_type, :external_type_display_name, :is_multi_phone_sync_credential, :parent_acs_credential_id, :starts_at, :visionline_metadata, :workspace_id
 
     date_accessor :created_at
 

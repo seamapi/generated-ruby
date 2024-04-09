@@ -23,13 +23,13 @@ module Seam
         nil
       end
 
-      def list(acs_system_id: nil, acs_credential_id: nil)
+      def list(acs_credential_id: nil, acs_system_id: nil)
         request_seam_object(
           :post,
           "/acs/entrances/list",
           Seam::AcsEntrance,
           "acs_entrances",
-          body: {acs_system_id: acs_system_id, acs_credential_id: acs_credential_id}.compact
+          body: {acs_credential_id: acs_credential_id, acs_system_id: acs_system_id}.compact
         )
       end
 

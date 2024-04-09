@@ -3,13 +3,13 @@
 module Seam
   module Clients
     class AccessCodesSimulate < BaseClient
-      def create_unmanaged_access_code(device_id:, name:, code:)
+      def create_unmanaged_access_code(code:, device_id:, name:)
         request_seam_object(
           :post,
           "/access_codes/simulate/create_unmanaged_access_code",
           Seam::UnmanagedAccessCode,
           "access_code",
-          body: {device_id: device_id, name: name, code: code}.compact
+          body: {code: code, device_id: device_id, name: name}.compact
         )
       end
     end
